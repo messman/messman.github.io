@@ -1,0 +1,33 @@
+{
+	"name": "messman.github.io",
+	"version": "1.0.0",
+	"description": "The personal site of Andrew Messier.",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack",
+		"build:w": "webpack --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/messman/messman.github.io.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/messman/messman.github.io/issues"
+	},
+	"homepage": "https://github.com/messman/messman.github.io#readme",
+	"dependencies": {
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-preset-env": "^1.7.0",
+		"css-loader": "^0.28.11",
+		"node-sass": "^4.9.0",
+		"sass-loader": "^7.0.2",
+		"style-loader": "^0.21.0",
+		"webpack": "^4.10.2"
+	},
+	"devDependencies": {
+		"webpack-cli": "^3.0.1"
+	}
+}
