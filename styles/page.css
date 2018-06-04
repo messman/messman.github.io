@@ -1,6 +1,14 @@
-html, body {
+html {
 	margin: 0;
 	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 1rem;
+	width: 100%;
+	height: 100%;
 }
 
 * {
@@ -12,13 +20,23 @@ body {
 	text-align: center;
 }
 
+a:link {
+	cursor: pointer;
+	display: block;
+}
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	color: inherit;
+}
+
 header {
 	font-size: .8rem;
+	margin: 1rem 0 3rem 0;
 }
 
 header h1 {
 	font-size: 4rem;
-	margin-bottom: 0;
+	margin: 0;
 	font-family: "Montserrat", sans-serif;
 	font-weight: 800;
 	text-transform: uppercase;
@@ -28,7 +46,7 @@ header h1 {
 		1px -1px 0 #000,
 		-1px 1px 0 #000,
 		1px 1px 0 #000,
-		0px 2px 2px #000;
+		0px 3px 4px #000;
 }
 
 header .pronounce {
@@ -43,9 +61,10 @@ header .pronounce strong {
 	font-weight: 800;
 }
 
-.icons {
-	margin: 2.5rem 0;
+.section {
+	margin: 6rem 0;
 }
+
 .icons::after {
 	float: clear;
 }
@@ -64,4 +83,55 @@ header .pronounce strong {
 	
 	text-align: center;
 	font-size: .6rem;
+}
+
+.projects {
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 500px;
+}
+
+.project {
+	margin: 1.5rem auto;
+}
+
+.project h2 {
+	display: inline-block;
+	font-size: 1.5rem;
+	margin: 0;
+	text-transform: uppercase;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 800;
+}
+
+.project svg {
+	display: inline-block;
+	width: 1.2rem;
+	height: 1.2rem;
+	margin-left: .5rem;
+}
+
+.project p {
+	margin: 0;
+}
+
+.quotes h2, .quotes h3 {
+	margin: 0;
+}
+
+footer {
+	font-size: .8rem;
+}	
+footer p {
+	margin: 0;
+}
+
+canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
 }
