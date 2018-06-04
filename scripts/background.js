@@ -3,20 +3,22 @@
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("ready");
 
+	var colorIndex = 0;
 	var colors = [
 		"#57DBAB", // mint
 		"#576FDB", // blue
 		"#DB5757", // red
+		"#DBA657", // orange
 	]
 
 	var CANVAS_ID = "render-canvas";
-	var CANVAS_ALPHA = .5;
-	var LINE_HEIGHT = 50;
-	var LINE_WIDTH_MIN = 150;
-	var LINE_WIDTH_MAX = 600;
-	var CREATE_MS_MIN = 1000;
-	var CREATE_MS_MAX = 3000;
-	var PX_PER_MS = .2;
+	var CANVAS_ALPHA = .1;
+	var LINE_HEIGHT = 70;
+	var LINE_WIDTH_MIN = 1200;
+	var LINE_WIDTH_MAX = 2000;
+	var CREATE_MS_MIN = 100;
+	var CREATE_MS_MAX = 200;
+	var PX_PER_MS = 1;
 
 	// All the lines we will need to draw in the canvas.
 	var linesToDraw = [];
@@ -90,7 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function getColor() {
-		return colors[Math.floor(Math.random() * colors.length)];
+		var color = colors[colorIndex];
+		colorIndex = (colorIndex + 1) % colors.length;
+		return color;
 	}
 
 	function addLine(now) {
