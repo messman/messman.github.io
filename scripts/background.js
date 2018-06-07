@@ -1,7 +1,5 @@
 "use strict";
-
-document.addEventListener("DOMContentLoaded", function () {
-	console.log("ready");
+function runBackground() {
 
 	var colorIndex = 0;
 	var colors = [
@@ -229,4 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		return true;
 	}
-});
+};
+(function (callback) {
+	if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) callback();
+	else document.addEventListener("DOMContentLoaded", callback);
+})(runBackground);
