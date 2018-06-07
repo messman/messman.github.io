@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	var CREATE_MS_MIN = 2000;
 	var CREATE_MS_MAX = 2000;
 	var TIME_MAX = 20000;
-	var PX_PER_MS = .1;
+	var PX_PER_MS = .2;
 
 	var TOTAL_LINE = LINE_HEIGHT + LINE_SPACING;
 	var HALF_LINE_HEIGHT = LINE_HEIGHT / 2;
@@ -57,14 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			ctx.backingStorePixelRatio || 1;
 		var ratio = devicePixelRatio / backingStoreRatio;
 
-		canvasWidth = window.innerWidth;
-		canvasHeight = window.innerHeight;
+		var size = canvas.getBoundingClientRect();
+		canvasWidth = size.width;
+		canvasHeight = size.height;
 
 		// Update canvas "crispness"
 		canvas.width = canvasWidth * ratio;
 		canvas.height = canvasHeight * ratio;
-		canvas.style.width = canvasWidth + "px";
-		canvas.style.height = canvasHeight + "px";
 		ctx.scale(ratio, ratio);
 
 		// Length of the diagonal, for knowing when to free up a line
