@@ -5,20 +5,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	var colorIndex = 0;
 	var colors = [
-		"#57DBAB", // mint
-		"#576FDB", // blue
-		"#DB5757", // red
-		"#DBA657", // orange
+		"#56C0FF",
+		"#2CB1FF",
+		"#0091E7",
+		"#027CC4",
 	]
 
 	var CANVAS_ID = "render-canvas";
-	var CANVAS_ALPHA = .1;
 	var LINE_HEIGHT = 70;
 	var LINE_WIDTH_MIN = 1200;
 	var LINE_WIDTH_MAX = 2000;
-	var CREATE_MS_MIN = 100;
-	var CREATE_MS_MAX = 200;
-	var PX_PER_MS = 1;
+	var LINE_SPACING = 5;
+	var LINE_END_PADDING = 20;
+	var CREATE_MS_MIN = 2000;
+	var CREATE_MS_MAX = 2000;
+	var TIME_MAX = 20000;
+	var PX_PER_MS = .1;
+
+	var TOTAL_LINE = LINE_HEIGHT + LINE_SPACING;
+	var HALF_LINE_HEIGHT = LINE_HEIGHT / 2;
+
+	var START_X = -HALF_LINE_HEIGHT;
+	var START_Y = LINE_SPACING + LINE_HEIGHT + HALF_LINE_HEIGHT;
+
+	var lineMaximumX = 0;
+	var lineMaximumY = 0;
+	var linesX = {};
+	var linesY = {};
+	var forX = true;
 
 	// All the lines we will need to draw in the canvas.
 	var linesToDraw = [];
@@ -29,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	var canvas = document.getElementById(CANVAS_ID);
 	var canvasWidth = 0;
 	var canvasHeight = 0;
+	// Figure out the (diagonal) length of our window (which is the canvas size).
+	var canvasDiagonal = 0;
 	var devicePixelRatio = window.devicePixelRatio || 1;
 
 	// Resize function.
@@ -43,13 +59,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		canvasWidth = window.innerWidth;
 		canvasHeight = window.innerHeight;
+
+		// Update canvas "crispness"
 		canvas.width = canvasWidth * ratio;
 		canvas.height = canvasHeight * ratio;
 		canvas.style.width = canvasWidth + "px";
 		canvas.style.height = canvasHeight + "px";
-
 		ctx.scale(ratio, ratio);
-		// ringRadius = (canvasWidth < 500) ? smallRingRadius : largeRingRadius;
+
+		// Length of the diagonal, for knowing when to free up a line
+		canvasDiagonal = Math.sqrt(Math.pow(canvasWidth, 2) + Math.pow(canvasHeight, 2));
+		lineMaximumX = Math.ceil(canvasWidth / (LINE_HEIGHT + LINE_SPACING));
+		lineMaximumY = Math.ceil(canvasHeight / (LINE_HEIGHT + LINE_SPACING));
 	};
 	window.onresize = resize;
 	resize();
@@ -76,15 +97,40 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 	animate();
 
+	// Top-left corner is the first X
+	// We need to offset Y by spacing + 1/2 height
+	// We need to offset X by -1/2 height
+	// XXXXXXXXXXXX
+	// Y
+	// Y
+	// Y
+	// Y
+
 	function getStartingPoint() {
-		var random = Math.random() * (canvasWidth + canvasHeight);
-		var x = 0;
-		var y = 0;
-		if (random > canvasWidth)
-			y = random - canvasWidth;
+		var isX = forX;
+		forX = !forX;
+		lineMaximumY = 5;
+		lineMaximumX = 5;
+		if (isX)
+			return getStartingPointOnAxis(true, lineMaximumX, linesX);
 		else
-			x = random;
-		return { x: x, y: y };
+			return getStartingPointOnAxis(false, lineMaximumY, linesY);
+	}
+
+	function getStartingPointOnAxis(isX, lineMaximum, lines) {
+		var possible = [];
+		for (var i = 0; i < lineMaximum; i++) {
+			if (!lines[i])
+				possible.push(i);
+		}
+		if (!possible.length)
+			return null;
+		var index = possible[Math.floor(Math.random() * possible.length)];
+		lines[index] = true;
+		return {
+			isX: isX,
+			index: index
+		};
 	}
 
 	function getWidth() {
@@ -99,8 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function addLine(now) {
 		var startingPoint = getStartingPoint();
+		console.log(startingPoint);
+		if (!startingPoint)
+			return;
 		var width = getWidth();
 		var diagonal = Math.sqrt(Math.pow(width, 2) + Math.pow(width, 2));
+		var diagonalCutOfPage = 0;
+		if (startingPoint.isX)
+			diagonalCutOfPage = Math.sqrt(Math.pow(width, 2) + Math.pow(width, 2));
+
 		var color = getColor();
 
 		linesToDraw.push({
@@ -128,34 +181,50 @@ document.addEventListener("DOMContentLoaded", function () {
 		if (!linesToDraw.length)
 			return;
 
-		// Figure out the (diagonal) length of our window (which is the canvas size).
-		var diagonal = Math.sqrt(Math.pow(canvasWidth, 2) + Math.pow(canvasHeight, 2));
-
 		for (var i = 0; i < linesToDraw.length; i++) {
-			var keep = drawSingle(ctx, now, diagonal, linesToDraw[i]);
-			if (!keep)
+			var ob = linesToDraw[i];
+			var keep = drawSingle(ctx, now, ob);
+			if (!keep) {
+				//console.log(ob);
 				linesToDraw[i] = null;
+			}
+			if (!keep || ob.openLine) {
+				var lines = ob.start.isX ? linesX : linesY;
+				delete lines[ob.start.index];
+			}
 		}
 	}
 
-	function drawSingle(ctx, now, diagonal, lineOb) {
+	function drawSingle(ctx, now, lineOb) {
+		var timePassed = now - lineOb.created;
+		var xDistanceTraveled = PX_PER_MS * timePassed;
+		var width = lineOb.width;
+		if (xDistanceTraveled > width)
+			lineOb.openLine = true;
 
-		var time = PX_PER_MS * (now - lineOb.created);
-		var lineDistance = Math.sqrt(Math.pow(time, 2) + Math.pow(time, 2));
-		if (lineDistance > diagonal + lineOb.diagonal)
+
+		var lineDistance = Math.sqrt(Math.pow(xDistanceTraveled, 2) + Math.pow(xDistanceTraveled, 2));
+		if (lineDistance > canvasDiagonal + lineOb.diagonal || timePassed > TIME_MAX)
 			return false;
 
-		var width = lineOb.width;
-		var x = lineOb.start.x - width + time;
-		var y = lineOb.start.y - width + time;
+		var index = lineOb.start.index;
+		var start = index * TOTAL_LINE;
+		var x = 0;
+		var y = 0;
+		if (lineOb.start.isX)
+			x += START_X + start;
+		else
+			y += START_Y + start;
+
+		x += xDistanceTraveled;
+		y += xDistanceTraveled;
 
 		ctx.fillStyle = lineOb.color;
-		ctx.globalAlpha = CANVAS_ALPHA;
 		ctx.beginPath();
 		ctx.moveTo(x, y);
-		ctx.lineTo(x + width, y + width);
-		ctx.lineTo(x + width, y + width + LINE_HEIGHT);
-		ctx.lineTo(x, y + LINE_HEIGHT);
+		ctx.lineTo(x - width, y - width);
+		ctx.lineTo(x - width, y - width - LINE_HEIGHT);
+		ctx.lineTo(x, y - LINE_HEIGHT);
 		ctx.closePath();
 		ctx.fill();
 
