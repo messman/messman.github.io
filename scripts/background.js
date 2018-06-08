@@ -4,33 +4,34 @@
 
 // Background constants
 // Debugging
-var DEBUG = true;
+var DEBUG = false;
 
 // Carolina blue theme
 var COLORS = [
-	"#56C0FF",
-	"#2CB1FF",
-	"#0091E7",
-	"#027CC4"
+	"#8EC9EC",
+	"#92C4E0",
+	"#C6E8FC",
+	"#C1DAE8"
 ];
+var CANVAS_ALPHA = .3;
 
 var CANVAS_ID = "render-canvas";
 // Height/thickness of each line (note, becomes the width if the axes are flipped)
-var LINE_HEIGHT = 70;
+var LINE_HEIGHT = 100;
 // Minimum/maximum width of a line (long side)
-var LINE_WIDTH_MIN = 500;
+var LINE_WIDTH_MIN = 200;
 var LINE_WIDTH_MAX = 800;
 // Empty space between each row of lines
 var LINE_SPACING = 5;
 // Spacing at the start and end of each line
 var LINE_END_PADDING = 20;
 // Maximum/minimum time between adding a new line
-var CREATE_MS_MIN = 3000;
-var CREATE_MS_MAX = 3000;
+var CREATE_MS_MIN = 400;
+var CREATE_MS_MAX = 800;
 // Maximum break time, in case something goes wrong
-var TIME_MAX = 40000;
+var TIME_MAX = 30000;
 // Speed coefficient
-var PX_PER_MS = .1;
+var PX_PER_MS = .06;
 
 /**
  * Runs a background animation using <canvas>.
@@ -70,8 +71,6 @@ function runBackground() {
 	// If not undefined for an index, then a new line can't be placed in this row.
 	var linesX = {};
 	var linesY = {};
-	// We flip between adding an X line and Y line.
-	var forX = true;
 
 	// All the lines we will need to draw in the canvas.
 	var linesToDraw = [];
@@ -135,9 +134,8 @@ function runBackground() {
 	animate();
 
 	function getStartingPoint() {
-		// Flip X or Y each time.
-		var isX = forX;
-		forX = !forX;
+		// Choose first between adding a Y line or X line.
+		var isX = (Math.floor(Math.random() * (lineMaximumX + lineMaximumY))) > lineMaximumY;
 		if (isX)
 			return getStartingPointOnAxis(true, lineMaximumX, linesX);
 		else
@@ -197,6 +195,7 @@ function runBackground() {
 	function draw(now) {
 		// Clear the canvas.
 		var ctx = canvas.getContext("2d");
+		ctx.globalAlpha = CANVAS_ALPHA;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		// Clear our dictionaries, because we're about to shift lines in the array.
