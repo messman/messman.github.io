@@ -29,7 +29,7 @@ var LINE_END_PADDING = 20;
 var CREATE_MS_MIN = 400;
 var CREATE_MS_MAX = 800;
 // Maximum break time, in case something goes wrong
-var TIME_MAX = 30000;
+var TIME_MAX = 60000;
 // Speed coefficient
 var PX_PER_MS = .05;
 
