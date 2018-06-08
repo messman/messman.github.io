@@ -31,7 +31,7 @@ var CREATE_MS_MAX = 800;
 // Maximum break time, in case something goes wrong
 var TIME_MAX = 30000;
 // Speed coefficient
-var PX_PER_MS = .06;
+var PX_PER_MS = .05;
 
 /**
  * Runs a background animation using <canvas>.
