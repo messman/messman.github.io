@@ -9,3 +9,4 @@ Thanks to:
 - IcoMoon for icon processing
 - Google Fonts for the Montserrat font
 - Sketch for being my design tool
+- Realfavicongenerator for the favicons/meta
