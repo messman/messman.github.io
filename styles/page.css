@@ -1,4 +1,5 @@
 html, body {
+	/* Allow our canvas to use all available screen space */
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -10,11 +11,16 @@ html {
 }
 
 body {
+	/* Bring back momentum scroll */
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 }
 
 main {
+	/*
+		Use min-width so the canvas expands with the page but also scrolls
+		when the content is larger than the page.
+	*/
 	position: relative;
 	margin: 0;
 	min-width: 100%;
@@ -28,6 +34,7 @@ main {
 }
 
 * {
+	/* <3 */
 	box-sizing: border-box;
 }
 
@@ -38,8 +45,8 @@ body {
 }
 
 a:link {
+	display: inline-block;
 	cursor: pointer;
-	display: block;
 }
 a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
@@ -61,7 +68,6 @@ header h2, h3, h4 {
 	font-weight: 300;
 }
 
-
 .section {
 	margin: 5rem 0;
 }
@@ -82,7 +88,6 @@ header h2, h3, h4 {
 }
 
 .icons .title {
-	
 	text-align: center;
 	font-size: .6rem;
 }

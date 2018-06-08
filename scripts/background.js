@@ -253,6 +253,7 @@ function runBackground() {
 		// Check if we're really done drawing the line.
 		var finishedInX = x - width - LINE_END_PADDING > canvasWidth;
 		var finishedInY = y - width - LINE_HEIGHT - LINE_END_PADDING > canvasHeight;
+		// TIME_MAX || finished in X || finished in Y
 		if (timePassed > TIME_MAX || finishedInX || finishedInY)
 			return false;
 
