@@ -81,7 +81,7 @@ function runBackground() {
 
 	// The canvas we will draw to.
 	var canvas = document.getElementById(CANVAS_ID);
-	var resize = (function () {
+	(function () {
 		var devicePixelRatio = window.devicePixelRatio || 1;
 		var ctx = canvas.getContext("2d");
 		var backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
@@ -96,6 +96,8 @@ function runBackground() {
 			var size = canvas.getBoundingClientRect();
 			canvasWidth = size.width;
 			canvasHeight = size.height;
+			if (DEBUG)
+				console.log(canvasWidth, canvasHeight, canvas.width, canvas.height);
 
 			// Update canvas "crispness" with the ratio
 			canvas.width = canvasWidth * ratio;
@@ -107,9 +109,8 @@ function runBackground() {
 			lineMaximumY = Math.ceil(canvasHeight / TOTAL_LINE);
 		};
 		window.onresize = resize;
-		return resize;
+		resize();
 	})();
-	resize();
 
 	// Get a random time until the next line is added.
 	function getNextLineTime() {
@@ -131,7 +132,7 @@ function runBackground() {
 		// Animate
 		requestAnimationFrame(animate);
 	}
-	animate();
+	requestAnimationFrame(animate);
 
 	function getStartingPoint() {
 		// Choose first between adding a Y line or X line.
