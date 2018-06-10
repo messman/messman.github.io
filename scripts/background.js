@@ -13,7 +13,7 @@ var COLORS = [
 	"#C6E8FC",
 	"#C1DAE8"
 ];
-var CANVAS_ALPHA = .3;
+var CANVAS_ALPHA = .2;
 
 var CANVAS_ID = "render-canvas";
 // Height/thickness of each line (note, becomes the width if the axes are flipped)
