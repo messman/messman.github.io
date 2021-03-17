@@ -4,7 +4,7 @@
 	"description": "A simple landing page for Andrew Messier",
 	"main": "index.js",
 	"scripts": {
-		"start": "http-server"
+		"start": "python -m SimpleHTTPServer"
 	},
 	"repository": {
 		"type": "git",
@@ -16,7 +16,5 @@
 		"url": "https://github.com/messman/messman.github.io/issues"
 	},
 	"homepage": "https://github.com/messman/messman.github.io#readme",
-	"devDependencies": {
-		"http-server": "^0.12.3"
-	}
+	"devDependencies": {}
 }
