@@ -132,7 +132,7 @@ header h2, h3, h4 {
 	display: block;
 	max-width: 400px;
 	font-style: italic;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 }
 
 q {
@@ -141,7 +141,7 @@ q {
 q::before, q::after {
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	opacity: .3;
 }
 q:before {
