@@ -16,21 +16,21 @@ var CANVAS_ALPHA = .2;
 
 var CANVAS_ID = "render-canvas";
 // Height/thickness of each line (note, becomes the width if the axes are flipped)
-var LINE_HEIGHT = 100;
+var LINE_HEIGHT = 400;
 // Minimum/maximum width of a line (long side)
-var LINE_WIDTH_MIN = 400;
-var LINE_WIDTH_MAX = 1200;
+var LINE_WIDTH_MIN = 600;
+var LINE_WIDTH_MAX = 1600;
 // Empty space between each row of lines
 var LINE_SPACING = 40;
 // Spacing at the start and end of each line
-var LINE_END_PADDING = 400;
+var LINE_END_PADDING = 200;
 // Maximum/minimum time between adding a new line
-var CREATE_MS_MIN = 1000;
-var CREATE_MS_MAX = 1600;
+var CREATE_MS_MIN = 1500;
+var CREATE_MS_MAX = 2500;
 // Maximum break time, in case something goes wrong
 var TIME_MAX = 60_000;
 // Speed coefficient
-var PX_PER_MS = .075;
+var PX_PER_MS = .06;
 
 /**
  * Runs a background animation using <canvas>.
