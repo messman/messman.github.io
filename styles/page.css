@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	/* Allow our canvas to use all available screen space */
 	margin: 0;
 	padding: 0;
@@ -48,7 +49,11 @@ a:link {
 	display: inline-block;
 	cursor: pointer;
 }
-a:link, a:visited, a:hover, a:active {
+
+a:link,
+a:visited,
+a:hover,
+a:active {
 	text-decoration: none;
 	color: inherit;
 }
@@ -64,12 +69,16 @@ header h1 {
 	font-weight: 800;
 	text-transform: uppercase;
 }
-header h2, h3, h4 {
+
+header h2,
+h3,
+h4 {
 	font-weight: 300;
 }
 
 .section {
-	margin: 5rem 0;
+	margin: 3rem auto;
+	max-width: 600px;
 }
 
 .icons::after {
@@ -92,20 +101,23 @@ header h2, h3, h4 {
 	font-size: .6rem;
 }
 
+.summary {
+	text-align: left;
+}
+
 .projects {
 	text-align: left;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 600px;
 }
 
 .project {
-	margin: 1.5rem auto;
+	margin: 2rem auto;
 }
 
-.project h2 {
+.project h3 {
 	display: inline-block;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	margin: 0;
 	text-transform: uppercase;
 	font-weight: 800;
@@ -124,7 +136,7 @@ header h2, h3, h4 {
 
 .project .subtitle {
 	font-size: 1.1rem;
-	font-style: italic;
+	font-weight: 500;
 }
 
 .quotes q {
@@ -136,17 +148,23 @@ header h2, h3, h4 {
 }
 
 q {
-	quotes: "“" "”" "‘" "’";
+	quotes: "“""”""‘""’";
 }
-q::before, q::after {
+
+q::before,
+q::after {
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
 	font-size: 1.5rem;
-	opacity: .3;
+	opacity: .5;
+	display: inline-block;
+	padding: 0 .25rem;
 }
+
 q:before {
 	content: open-quote;
 }
+
 q:after {
 	content: close-quote;
 }
@@ -154,7 +172,8 @@ q:after {
 footer {
 	font-size: .8rem;
 	padding: 1rem;
-}	
+}
+
 footer p {
 	margin: 0;
 }

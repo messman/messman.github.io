@@ -1,6 +1,5 @@
 "use strict";
 // Background animation script
-// ES5
 
 // Background constants
 // Debugging
@@ -19,19 +18,19 @@ var CANVAS_ID = "render-canvas";
 // Height/thickness of each line (note, becomes the width if the axes are flipped)
 var LINE_HEIGHT = 100;
 // Minimum/maximum width of a line (long side)
-var LINE_WIDTH_MIN = 200;
-var LINE_WIDTH_MAX = 800;
+var LINE_WIDTH_MIN = 400;
+var LINE_WIDTH_MAX = 1200;
 // Empty space between each row of lines
-var LINE_SPACING = 5;
+var LINE_SPACING = 40;
 // Spacing at the start and end of each line
-var LINE_END_PADDING = 20;
+var LINE_END_PADDING = 400;
 // Maximum/minimum time between adding a new line
-var CREATE_MS_MIN = 400;
-var CREATE_MS_MAX = 800;
+var CREATE_MS_MIN = 1000;
+var CREATE_MS_MAX = 1600;
 // Maximum break time, in case something goes wrong
-var TIME_MAX = 60000;
+var TIME_MAX = 60_000;
 // Speed coefficient
-var PX_PER_MS = .05;
+var PX_PER_MS = .075;
 
 /**
  * Runs a background animation using <canvas>.
@@ -45,7 +44,7 @@ function runBackground() {
 			var color = COLORS[colorIndex];
 			colorIndex = (colorIndex + 1) % COLORS.length;
 			return color;
-		}
+		};
 	})();
 
 	// The total height of a line is its height plus the spacing between rows
@@ -228,7 +227,7 @@ function runBackground() {
 	}
 
 	function drawSingle(ctx, now, lineOb) {
-		// Use the passage of time to mark distance travelled.
+		// Use the passage of time to mark distance traveled.
 		var timePassed = now - lineOb.created;
 		var distance = PX_PER_MS * timePassed;
 		var width = lineOb.width;

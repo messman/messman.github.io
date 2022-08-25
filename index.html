@@ -22,13 +22,11 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:description" content="Andrew Messier - Software Engineer, Web Developer, Designer" />
 
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,800" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
 	<link href="styles/page.css" rel="stylesheet" />
 	<script async defer src="scripts/background.js"></script>
-
-	<!-- Google Analytics (bleh) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120637549-1"></script>
-	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-120637549-1');</script>
 </head>
 
 <body>
@@ -40,6 +38,14 @@
 				<h3>Charlotte, NC</h2>
 			</header>
 			<div class="section icons">
+				<span>
+					<a href="https://linkedin.com/in/andrewgmessier" title='LinkedIn'>
+						<svg class="icon icon-li">
+							<use xlink:href="#icon-li"></use>
+						</svg>
+						<div class="title">LinkedIn</div>
+					</a>
+				</span>
 				<span>
 					<a href="https://github.com/messman" title='GitHub'>
 						<div>
@@ -58,71 +64,37 @@
 						<div class="title">Stack Overflow</div>
 					</a>
 				</span>
-				<span>
-					<a href="https://linkedin.com/in/andrewgmessier" title='LinkedIn'>
-						<svg class="icon icon-li">
-							<use xlink:href="#icon-li"></use>
-						</svg>
-						<div class="title">LinkedIn</div>
-					</a>
-				</span>
-				<!-- <span>
-					<a href="https://twitter.com/AndrewGMessier" title='Twitter'>
-						<svg class="icon icon-tw">
-							<use xlink:href="#icon-tw"></use>
-						</svg>
-						<div class="title">Twitter</div>
-					</a>
-				</span> -->
-				<!-- <span>
-					<a href="resume.pdf">
-						<svg class="icon icon-pdf">
-							<use xlink:href="#icon-pdf"></use>
-						</svg>
-						<div class="title">Résumé</div>
-					</a>
-				</span> -->
+			</div>
+			<div class="section summary">
+				<p>
+					I've been a software engineer professionally since 2015.
+					I began as a front-end developer and have grown to become a back-end developer,
+					operations engineer, product manager, scrum master, and designer.
+					I am known amongst my peers as attentive to detail, as an advocate for testing and
+					documentation, and as a true follower of the principle "do it right the first time".
+				</p>
 			</div>
 			<div class="section projects">
-				<!-- <div class="project">
-					<a href="https://github.com/messman/of-the-day">
-						<h2>of-the-day</h2>
-						<svg class="icon icon-gh">
-							<use xlink:href="#icon-gh"></use>
-						</svg>
-					</a>
-					<p class="subtitle">An experiment in sharing semi-daily updates during the first year of working for
-						myself.</p>
-					<p>
-						This responsive app displays personal updates, music, videos, photos, and other miscellaneous
-						content that I manage from Google Sheets.
-						This project served as an exercise in planning, designing, developing, curating, and deploying
-						an application solo.
-					</p>
-					<p>
-						This project uses React, TypeScript, Node.js, and much more.
-					</p>
-				</div> -->
+				<h2>A few projects</h2>
 				<div class="project">
-					<a href="https://github.com/messman/quick-tides">
-						<h2>quick-tides</h2>
+					<a href="https://github.com/messman/tidy">
+						<h3>Wells Beach Time</h3>
 						<svg class="icon icon-gh">
 							<use xlink:href="#icon-gh"></use>
 						</svg>
 					</a>
-					<p class="subtitle">A mobile web app for tide info in Maine.</p>
+					<p class="subtitle">A mobile web app for making the most of your Maine beach vacation.</p>
 					<p>
-						The application uses the excellent NOAA (National Oceanic and Atmospheric Administration) API to
-						retrieve the air and water data for the station near my parents' home in Maine so that they and
-						their guests have a quick reference no matter the device they're using.
-					</p>
-					<p>
-						This project uses React, TypeScript, SCSS, Docker, Express, Nginx... and a lot more.
+						This web app pulls tide and weather data from free third-party APIs (including OpenWeather
+						and NOAA) to show residents (such as my family)
+						and visitors to Wells, Maine the ideal time to make use of the beach each day. The app is used
+						on
+						a daily basis.
 					</p>
 				</div>
 				<div class="project">
 					<a href="https://github.com/messman/paste-dupes">
-						<h2>paste-dupes</h2>
+						<h3>paste-dupes</h3>
 						<svg class="icon icon-gh">
 							<use xlink:href="#icon-gh"></use>
 						</svg>
@@ -130,44 +102,33 @@
 					<p class="subtitle">A simple desktop web app for getting rid of duplicates in lists and comparing
 						them.</p>
 					<p>
-						This short project grew out of a need to get duplicates out of my Spotify playlists and
-						compare two different playlists.
-						When one copies songs out of Spotify and pastes them into a text field, the songs show as
-						text URLs. The application uses those URLs to check for duplicates.
+						This app grew out of a need to remove duplicates from Spotify playlists and
+						run comparisons between playlists.
+						When one copies songs in Spotify and pastes them into a text field, the songs show as
+						text URLs. The app uses those URLs to check for duplicates.
 					</p>
 				</div>
 				<div class="project">
 					<a href="https://github.com/messman/simple-calc">
-						<h2>simple-calc</h2>
+						<h3>simple-calc</h3>
 						<svg class="icon icon-gh">
 							<use xlink:href="#icon-gh"></use>
 						</svg>
 					</a>
 					<p class="subtitle">A simple JavaScript calculator with a little canvas color.</p>
 					<p>
-						This calculator can process parentheses (using eval), which makes it more useful to the
-						everyday user than the iOS calculator app. It also always shows the current computed result.
-					</p>
-					<p>
-						As a personal challenge, it doesn't use jQuery, React, or any other front-end framework - it's
-						too simplistic to need one.
-						It uses Babel and Webpack so I could experiment with ES2015 modules and guarantee cross-platform
-						support while working with the latest JavaScript features.
+						This online calculator can process parentheses and always shows the current computed result.
+						It uses no front-end frameworks: bare HTML, CSS, and JavaScript only.
 					</p>
 				</div>
 				<div class="project">
 					<a href="https://github.com/messman/messman.github.io">
-						<h2>this page</h2>
+						<h3>this page</h3>
 						<svg class="icon icon-gh">
 							<use xlink:href="#icon-gh"></use>
 						</svg>
 					</a>
-					<p>Always a work in progress.</p>
-				</div>
-				<div class="project">
-					<p>
-						<em>There's always more coming soon.</em>
-					</p>
+					<p>Simple, rarely updated, and forever a work in progress.</p>
 				</div>
 			</div>
 			<div class="section quotes">
@@ -175,7 +136,7 @@
 			</div>
 			<footer>
 				<p>Copyright &copy; Andrew Messier.</p>
-				<p>design in Sketch; icons from FontAwesome &amp; IcoMoon; fonts from Google Fonts</p>
+				<p>Credit: FontAwesome; IcoMoon; Google Fonts</p>
 			</footer>
 		</div>
 		<canvas id="render-canvas"></canvas>

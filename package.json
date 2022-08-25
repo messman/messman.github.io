@@ -4,7 +4,7 @@
 	"description": "A simple landing page for Andrew Messier",
 	"main": "index.js",
 	"scripts": {
-		"start": "python -m SimpleHTTPServer 9797"
+		"start": "python3 -m http.server 9797"
 	},
 	"repository": {
 		"type": "git",
